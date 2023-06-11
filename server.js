@@ -8,7 +8,7 @@ const {userJoin, getCurrentUser, userLeave, getRoomUsers} = require('./utils/use
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-const botName = 'Chat Bot';
+const botName = 'Crow Chat Bot';
 
 //Setting the static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -22,7 +22,7 @@ io.on('connection', socket => {
         socket.join(user.room);
 
         //Welcome a user to the Chat room
-        socket.emit('message', formatMessage(botName, 'Welcome to ChatCord!'));
+        socket.emit('message', formatMessage(botName, 'Welcome to Crow Chats'));
 
         //Broadcast when a user connects
         socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has joined.`));
@@ -38,6 +38,7 @@ io.on('connection', socket => {
     socket.on('chatMessage', (msg) => {
         const user = getCurrentUser(socket.id);
         //Emit the message to everybody
+
         io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
 

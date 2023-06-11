@@ -2,9 +2,11 @@ const socket = io();
 const chatForm = document.getElementById('chat-form');
 
 //Get user and room info from URL
-const {username, room} = Qs.parse(location.search, {
+const {room} = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 });
+
+const username = window.localStorage.getItem("email");
 
 
 //Join a Chatroom
@@ -52,3 +54,5 @@ function outputMessages (msg) {
         behavior: 'smooth'
     });
 }
+
+//arnav1
