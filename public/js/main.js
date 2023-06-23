@@ -6,7 +6,7 @@ const {room} = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 });
 
-const username = window.localStorage.getItem("email");
+const username = window.localStorage.getItem("id");
 
 
 //Join a Chatroom
@@ -20,7 +20,7 @@ socket.on('roomUsers', (({room, users}) => {
 
     //Updating the users list on the sidebar
     const usersList = document.querySelector('#users');
-    usersList.innerHTML = users.map(user => `<li><i class="fas fa-user"></i> ${user.username}</li>`).join('');
+    usersList.innerHTML = users.map(user => `<li><i class="fas fa-user"></i>Crowser-${user.username.substring(0,8)}</li>`).join('');
 }));
 
 //Getting the message from the back-end

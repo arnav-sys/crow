@@ -76,9 +76,10 @@
 
         <!-- JavaScript -->
         <script type="module">
+            
             import{ initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
             import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
-            import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+            import { getAuth,updateProfile, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -104,6 +105,7 @@ if(window.localStorage.getItem("email")){
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
+
 console.log(app);
         var login = document.getElementById("login")
         var register = document.getElementById("signup")
@@ -114,8 +116,9 @@ console.log(app);
   e.preventDefault();
   createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
     const user = userCredential.user;
-    console.log(user.email);
+    console.log(user);
     window.localStorage.setItem("email",user.email)
+    window.localStorage.setItem("id",user.uid)
     console.log("asfas")
     alert("Registration successfully!!");
     window.location = "/group.html"
@@ -125,6 +128,7 @@ console.log(app);
     console.log(errorMessage);
     alert(error);
   })
+ 
 })
 login.addEventListener("click",e=>{
         var email = document.getElementById("login-email").value;
